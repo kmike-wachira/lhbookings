@@ -70,11 +70,11 @@
         <div class="container">
             <div class="row site-hero-inner justify-content-center align-items-center">
                 <div class="col-md-10 text-center" data-aos="fade">
-                    <h1 class="heading mb-3">Login Form</h1>
+                    <h1 class="heading mb-3">Lecture Hall</h1>
                     <ul class="custom-breadcrumbs mb-4">
                         <li><a href="index.html">Home</a></li>
                         <li>&bullet;</li>
-                        <li>Login</li>
+                        <li>Add Lecture Room</li>
                     </ul>
                 </div>
             </div>
@@ -91,45 +91,42 @@
     <section class="section contact-section" id="next">
         <div class="container">
             <div class="row">
-                <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
-                    <form action="/backend/functions.php" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+                    <form action="/backend/addlhall.php" method="post" class="bg-white p-md-5 p-4 mb-5 border" enctype="multipart/form-data">
                         <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="text-black font-weight-bold" for="name">Lecture Hall Name</label>
+                                <input type="text" id="name" class="form-control ">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="text-black font-weight-bold" for="Cover Pic">Cover Picture</label>
+                                <input type="file" accept=".png,.jpg" id="Cover Pic" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="text-black font-weight-bold" for="lh_capacity"> Lecture Hall Capacity</label>
+                                <input type="number" id="lh_capacity" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
                             <div class="col-md-12 form-group">
-                                <label class="text-black font-weight-bold" for="email">Email</label>
-                                <input type="email" id="email" name="lecturer_email" class="form-control ">
+                                <label class="text-black font-weight-bold" for="message">Lecture Hall Descrption</label>
+                                <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
                             </div>
-                            <div class="col-md-12 form-group">
-                                <label class="text-black font-weight-bold" for="password">Password</label>
-                                <input type="password" id="password " name="lecturer_password" class=" form-control ">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <button type="submit" name="addlecture_hall" class="btn btn-primary text-white py-3 px-5 font-weight-bold">Add Lecture Hall</button>
                             </div>
-                            <div class="row text-center ">
-                                <div class="col-md-6 form-group ">
-                                    <button type="submit " name="login" class="btn btn-primary text-white py-3 px-5 font-weight-bold ">Login Now </button>
-                                </div>
-                            </div>
-
                         </div>
                     </form>
 
                 </div>
-                <div class="col-md-5 " data-aos="fade-up " data-aos-delay="200 ">
-                    <div class="row ">
-                        <div class="col-md-10 ml-auto contact-info ">
-                            <p><span class="d-block ">Address:</span> <span class="text-black "> 98 West 21th Street,
-                                    Suite 721 New York NY 10016</span></p>
-                            <p><span class="d-block ">Phone:</span> <span class="text-black "> (+1) 435 3533</span></p>
-                            <p><span class="d-block ">Email:</span> <span class="text-black ">
-                                    info@yourdomain.com</span></p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-
-
-
 
     <footer class="section footer-section">
         <div class="container">
@@ -187,23 +184,23 @@
         </div>
     </footer>
 
-    <script src="js/jquery-3.3.1.min.js "></script>
-    <script src="js/jquery-migrate-3.0.1.min.js "></script>
-    <script src="js/popper.min.js "></script>
-    <script src="js/bootstrap.min.js "></script>
-    <script src="js/owl.carousel.min.js "></script>
-    <script src="js/jquery.stellar.min.js "></script>
-    <script src="js/jquery.fancybox.min.js "></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
 
 
-    <script src="js/aos.js "></script>
+    <script src="js/aos.js"></script>
 
-    <script src="js/bootstrap-datepicker.js "></script>
-    <script src="js/jquery.timepicker.min.js "></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
 
 
 
-    <script src="js/main.js "></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

@@ -26,3 +26,26 @@ if (isset($_POST['register'])) {
         $error = "You have empty fields";
     }
 }
+
+if (isset($_POST['login'])) {
+    $lecturer_email = mysqli_real_escape_string($conn, $_POST['lecturer_email']);
+    $lecturer_password = mysqli_real_escape_string($conn, $_POST['lecturer_password']);
+
+    if(!empty($lecturer_email) || !empty($lecturer_password)){
+        $login_sql="SELECT * FROM `users` WHERE `password`='$lecturer_password' AND `email`='$lecturer_email'";
+        $result = $conn->query($login_sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "id: " . $row["id"] . " - Name: " . $row["name"] . " " . $row["email"] . "<br>";
+            }
+        } else {
+            echo "0 results";
+        }
+
+    }
+
+    $sql = "SELECT id, firstname, lastname FROM MyGuests WHERE lastname='Doe'";
+    
+}
