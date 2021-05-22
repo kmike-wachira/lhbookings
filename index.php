@@ -1,3 +1,4 @@
+<?php include 'backend/functions.php';?>
 <!DOCTYPE HTML>
 <html>
 
@@ -25,14 +26,13 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
     <header class="site-header js-site-header">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6 col-lg-4 site-logo" data-aos="fade">
-                    <a href="index.html">Room Booker </a>
+                    <a href="index.php">Room Booker </a>
                 </div>
                 <div class="col-6 col-lg-8">
 
@@ -50,7 +50,7 @@
                                 <div class="row full-height align-items-center">
                                     <div class="col-md-6 mx-auto">
                                         <ul class="list-unstyled menu">
-                                            <li class="active"><a href="index.html">Home</a></li>
+                                            <li class="active"><a href="index.php">Home</a></li>
                                             <li><a href="rooms.html">Rooms</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="events.html">Events</a></li>
@@ -186,134 +186,35 @@
         </div>
     </section>
 
-    <section class="section testimonial-section">
-        <div class="container">
-            <div class="row justify-content-center text-center mb-5">
-                <div class="col-md-7">
-                    <h2 class="heading" data-aos="fade-up">People Says</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="js-carousel-2 owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
-
-                    <div class="testimonial text-center slider-item">
-                        <div class="author-image mb-3">
-                            <img src="images/person_1.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-                        </div>
-                        <blockquote>
-
-                            <p>&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-                        </blockquote>
-                        <p><em>&mdash; Jean Smith</em></p>
-                    </div>
-
-                    <div class="testimonial text-center slider-item">
-                        <div class="author-image mb-3">
-                            <img src="images/person_2.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-                        </div>
-                        <blockquote>
-                            <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
-                        </blockquote>
-                        <p><em>&mdash; John Doe</em></p>
-                    </div>
-
-                    <div class="testimonial text-center slider-item">
-                        <div class="author-image mb-3">
-                            <img src="images/person_3.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-                        </div>
-                        <blockquote>
-
-                            <p>&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.&rdquo;</p>
-                        </blockquote>
-                        <p><em>&mdash; John Doe</em></p>
-                    </div>
-
-
-                    <div class="testimonial text-center slider-item">
-                        <div class="author-image mb-3">
-                            <img src="images/person_1.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-                        </div>
-                        <blockquote>
-
-                            <p>&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-                        </blockquote>
-                        <p><em>&mdash; Jean Smith</em></p>
-                    </div>
-
-                    <div class="testimonial text-center slider-item">
-                        <div class="author-image mb-3">
-                            <img src="images/person_2.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-                        </div>
-                        <blockquote>
-                            <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
-                        </blockquote>
-                        <p><em>&mdash; John Doe</em></p>
-                    </div>
-
-                    <div class="testimonial text-center slider-item">
-                        <div class="author-image mb-3">
-                            <img src="images/person_3.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-                        </div>
-                        <blockquote>
-
-                            <p>&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.&rdquo;</p>
-                        </blockquote>
-                        <p><em>&mdash; John Doe</em></p>
-                    </div>
-
-                </div>
-                <!-- END slider -->
-            </div>
-
-        </div>
-    </section>
-
 
     <section class="section blog-post-entry bg-light">
         <div class="container">
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-md-7">
-                    <h2 class="heading" data-aos="fade-up">Events</h2>
+                    <h2 class="heading" data-aos="fade-up">More Lecture Halls</h2>
                     <p data-aos="fade-up">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
-
+                <?php 
+                $lecturehalls= getAllLectureHalls();
+                foreach($lecturehalls as $lecturehall  ):?>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
                     <div class="media media-custom d-block mb-4 h-100">
-                        <a href="#" class="mb-4 d-block"><img src="images/img_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                        <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php  echo $lecturehall['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
                         <div class="media-body">
-                            <span class="meta-post">February 26, 2018</span>
-                            <h2 class="mt-0 mb-3"><a href="#">Travel Hacks to Make Your Flight More Comfortable</a></h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <!-- <span class="meta-post">February 26, 2018</span> -->
+                            <h2 class="mt-0 mb-3"><a href="#"><?php  echo $lecturehall['lh_name'] ?></a></h2>
+                            <span class="meta-post" > Maximum No of Students <strong><?php  echo $lecturehall['lh_capacity'] ?> </strong> </span>
+                            <h4>Brief</h4>
+                            <p><?php  echo $lecturehall['lh_desc'] ?> </p>
                         </div>
                     </div>
-
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="200">
-                    <div class="media media-custom d-block mb-4 h-100">
-                        <a href="#" class="mb-4 d-block"><img src="images/img_2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        <div class="media-body">
-                            <span class="meta-post">February 26, 2018</span>
-                            <h2 class="mt-0 mb-3"><a href="#">5 Job Types That Aallow You To Earn As You Travel The World</a></h2>
-                            <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="300">
-                    <div class="media media-custom d-block mb-4 h-100">
-                        <a href="#" class="mb-4 d-block"><img src="images/img_3.jpg" alt="Image placeholder" class="img-fluid"></a>
-                        <div class="media-body">
-                            <span class="meta-post">February 26, 2018</span>
-                            <h2 class="mt-0 mb-3"><a href="#">30 Great Ideas On Gifts For Travelers</a></h2>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. t is a paradisematic country, in which roasted parts of sentences.</p>
-                        </div>
-                    </div>
-                </div>
+                   <?php endforeach ?>
             </div>
         </div>
     </section>
-
     <section class="section bg-image overlay" style="background-image: url('images/hero_4.jpg');">
         <div class="container">
             <div class="row align-items-center">

@@ -31,8 +31,8 @@ if (isset($_POST['login'])) {
     $lecturer_email = mysqli_real_escape_string($conn, $_POST['lecturer_email']);
     $lecturer_password = mysqli_real_escape_string($conn, $_POST['lecturer_password']);
 
-    if(!empty($lecturer_email) || !empty($lecturer_password)){
-        $login_sql="SELECT * FROM `users` WHERE `password`='$lecturer_password' AND `email`='$lecturer_email'";
+    if (!empty($lecturer_email) || !empty($lecturer_password)) {
+        $login_sql = "SELECT * FROM `users` WHERE `password`='$lecturer_password' AND `email`='$lecturer_email'";
         $result = $conn->query($login_sql);
 
         if ($result->num_rows > 0) {
@@ -43,9 +43,42 @@ if (isset($_POST['login'])) {
         } else {
             echo "0 results";
         }
-
     }
 
     $sql = "SELECT id, firstname, lastname FROM MyGuests WHERE lastname='Doe'";
-    
 }
+function getAllLectureHalls()
+{
+    global $conn;
+    $all_lh_sql = "SELECT * FROM `lecture_rooms`";
+    $lecturehalls = [];
+    $result = $conn->query($all_lh_sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            array_push($lecturehalls, $row);
+        }
+    } else {
+        echo "0 results";
+    }
+    return $lecturehalls;
+}
+function getSingleHall($id)
+{
+    global $conn;
+    $all_lh_sql = "SELECT * FROM `lecture_rooms` WHERE id='$id'";
+    $lecturehalls = [];
+    $result = $conn->query($all_lh_sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            array_push($lecturehalls, $row);
+        }
+    } else {
+        echo "0 results";
+    }
+    return $lecturehalls;
+}
+print_r(
+    getSingleHall(1)
+);

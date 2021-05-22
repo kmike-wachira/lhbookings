@@ -47,8 +47,17 @@ if ($uploadOk == 0) {
 } else {
 
     if (move_uploaded_file($_FILES["lh_cover_image"]["tmp_name"], $target_file)) {
+        $lh_c_image = htmlspecialchars(basename($_FILES["lh_cover_image"]["name"]));
+        $upload_sql = "INSERT INTO `lecture_rooms`(`lh_name`, `lh_capacity`, `lh_cover_image`, `lh_desc`)
+        VALUES ('$lh_name','$lh_capacity','$lh_c_image','$lh_description')";
+        if ($conn->query($upload_sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $upload_sql . "<br>" . $conn->error;
+        }
         echo "The file " . htmlspecialchars(basename($_FILES["lh_cover_image"]["name"])) . " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+
