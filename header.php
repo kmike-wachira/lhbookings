@@ -1,3 +1,6 @@
+<?php 
+// session_start();
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -27,7 +30,7 @@
 </head>
 
 <body>
-<header class="site-header js-site-header">
+    <header class="site-header js-site-header">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6 col-lg-4 site-logo" data-aos="fade">
@@ -48,9 +51,16 @@
                                     <div class="col-md-6 mx-auto">
                                         <ul class="list-unstyled menu">
                                             <li class="active"><a href="index.php">Home</a></li>
-                                            <li><a href="login.php">Login</a></li>
-                                            <li><a href="register.php">Register</a></li>
-                                            <li><a href="addlectureroom.php">Add Halls</a></li>
+
+                                            <?php if (isset($_SESSION['id'])) : ?>
+                                                <li><?= $_SESSION['username']?></li>
+                                                <li><a href="logout.php">Logout</a></li>
+                                                <li><a href="addlectureroom.php">Add Halls</a></li>
+                                            <?php else :  ?>
+                                                <li><a href="login.php">Login</a></li>
+                                                <li><a href="register.php">Register</a></li>
+                                            <?php endif  ?>
+
                                         </ul>
                                     </div>
                                 </div>

@@ -16,9 +16,13 @@ if (isset($_POST['register'])) {
             $register_sql = "INSERT INTO `users`(`name`, `email`, `phone`, `password`) 
             VALUES ('$lecturer_name','$lecturer_email','$lecturer_phone','$lecturer_password')";
             if ($conn->query($register_sql) === TRUE) {
-                echo "New record created successfully";
+                $last_id = $conn->insert_id;
+                $_SESSION['id'] = $last_id;
+                $_SESSION['username'] = $lecturer_name;
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit;
             } else {
-                echo "Error: " . $register_sql . "<br>" . $conn->error;
+                header('location:../register.php');
             }
         } else {
             $error = "Password mismatch";
@@ -39,7 +43,9 @@ if (isset($_POST['login'])) {
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                echo "id: " . $row["id"] . " - Name: " . $row["name"] . " " . $row["email"] . "<br>";
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['username'] = $row['name'];
+                header('Location: ../index.php');
             }
         } else {
             echo "0 results";
@@ -170,5 +176,5 @@ function searchHalls()
 
 if (isset($_POST['check'])) {
     $students = $_POST['no_of_students'];
-    header('Location:../halls.php?students='.$students.'');
+    header('Location:../halls.php?students=' . $students . '');
 }
