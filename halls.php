@@ -1,4 +1,7 @@
-<?php include 'backend/functions.php'; ?>
+<?php
+include 'backend/functions.php';
+$students = $_GET['students'];
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -84,91 +87,44 @@
     </section>
     <!-- END section -->
 
-    <section class="section bg-light pb-0">
-        <div class="container">
-
-            <div class="row check-availabilty" id="next">
-                <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-
-                    <form action="/backend/functions.php" method="post">
-                        <div class="row">
-                            <div class="col-md-4 mb-3 mb-lg-0 col-lg-3">
-                                <label for="checkin_date" class="font-weight-bold text-black">Lecture Date</label>
-                                <div class="field-icon-wrap">
-                                    <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" id="checkin_date" name="lecture_date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2 mb-3 mb-md-0">
-                                <label for="adults" class="font-weight-bold text-black">Lecture periods</label>
-                                <div class="field-icon-wrap">
-                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="lecture_period" id="adults" class="form-control">
-                                        <option value="1">7-9 am</option>
-                                        <option value="2">9-11 am</option>
-                                        <option value="3">11-13pm</option>
-                                        <option value="4">2pm-4pm</option>
-                                        <option value="5">4pm-6pm</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 mb-3 mb-lg-0 col-lg-3">
-                                <label for="checkin_date" class="font-weight-bold text-black">No Of Students</label>
-                                <div class="field-icon-wrap">
-                                    <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="number" name="no_of_students" id="max-students" class="form-control w-100">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-lg-3 align-self-end">
-                                <button class="btn btn-primary btn-block text-white" type="submit" name="check">Check Availabilty</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section blog-post-entry bg-light">
+    <section class="section">
         <div class="container">
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-md-7">
-                    <h2 class="heading" data-aos="fade-up">Institution Lecture Halls</h2>
-                    <p data-aos="fade-up"> Select the lecture hall that matches your needs</p>
+                    <h2 class="heading" data-aos="fade-up">Rooms &amp; Lecture Halls Available</h2>
+                    <p data-aos="fade-up" data-aos-delay="100"> Available halls around the institution</p>
+
                 </div>
             </div>
             <div class="row">
                 <?php
-                $lecturehalls = getAllLectureHalls();
-                foreach ($lecturehalls as $lecturehall) : ?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
-                        <div class="media media-custom d-block mb-4 h-100">
-                            <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php echo $lecturehall['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
-                            <div class="media-body">
-                                <!-- <span class="meta-post">February 26, 2018</span> -->
-                                <h2 class="mt-0 mb-3"><a href="/reservation.php?id=<?php echo $lecturehall['id'] ?>"><?php echo $lecturehall['lh_name'] ?></a></h2>
-                                <span class="meta-post"> Maximum No of Students <strong><?php echo $lecturehall['lh_capacity'] ?> </strong> </span>
-                                <h4>Brief</h4>
-                                <p><?php echo $lecturehall['lh_desc'] ?> </p>
+
+                $halls = getHalls($students);
+                foreach ($halls as $hall) :
+                ?>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                        <a href="#" class="room">
+                            <figure class="img-wrap">
+                                <img src="uploadimages/<?= $hall['lh_cover_image']  ?>" alt="Free website template" class="img-fluid mb-3">
+                            </figure>
+                            <div class="p-3 text-center room-info">
+                                <h5><?= $hall['lh_name'] ?></h5>
+                                <span class="text-uppercase letter-spacing-1">Max Students <?= $hall['lh_capacity'] ?></span>
+                                <p><a href="/reservation.php?id=<?= $hall['id'] ?>" class="btn btn-primary text-white">Book Now</a></p>
+
                             </div>
-                        </div>
+                        </a>
                     </div>
-                <?php endforeach ?>
+
+                <?php
+                endforeach;
+
+                ?>
+
+
             </div>
         </div>
     </section>
-    <!-- <section class="section bg-image overlay" style="background-image: url('images/hero_4.jpg');">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left" data-aos="fade-up">
-                    <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
-                </div>
-                <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
-                    <a href="reservation.html" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
-                </div>
-            </div>
-        </div>
-    </section> -->
 
     <footer class="section footer-section">
         <div class="container">

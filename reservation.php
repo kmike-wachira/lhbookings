@@ -1,6 +1,6 @@
 <?php
 include 'backend/functions.php';
-$hall_id =(int) $_GET['id'];
+$hall_id = (int) $_GET['id'];
 
 ?>
 <!DOCTYPE HTML>
@@ -98,92 +98,75 @@ $hall_id =(int) $_GET['id'];
             <div class="row">
                 <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
 
-                    <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+                    <?php if ($response_message = 'correct') : ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Correct</strong> Lecture Hall booked
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php elseif($response_message = 'error') : ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Holy guacamole!</strong> The Lecture Hall is already Booked.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    <?php endif ?>
+
+                    <form action="/backend/functions.php" method="post" class="bg-white p-md-5 p-4 mb-5 border">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label class="text-black font-weight-bold" for="name">Name</label>
-                                <input type="text" id="name" class="form-control ">
+                                <label class="text-black font-weight-bold" for="name">No of Students</label>
+                                <input type="number" name="number_of_students" required id="name" class="form-control ">
+                                <input type="text" class=" d-none" name="hall_id" value="<?= $hall_id ?>" id="name" class="form-control ">
+
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6 form-group">
-                                <label class="text-black font-weight-bold" for="phone">Phone</label>
-                                <input type="text" id="phone" class="form-control ">
+                                <label class="text-black font-weight-bold" for="lh_date">Lecture Date</label>
+                                <input type="date" id="lh_date" name="l_date" required class="form-control">
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label class="text-black font-weight-bold" for="email">Email</label>
-                                <input type="email" id="email" class="form-control ">
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6 form-group">
-                                <label class="text-black font-weight-bold" for="checkin_date">Date Check In</label>
-                                <input type="text" id="checkin_date" class="form-control">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label class="text-black font-weight-bold" for="checkout_date">Date Check Out</label>
-                                <input type="text" id="checkout_date" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="adults" class="font-weight-bold text-black">Adults</label>
+                                <label for="adults" class="font-weight-bold text-black">Lecture Duration</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="" id="adults" class="form-control">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4+</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="children" class="font-weight-bold text-black">Children</label>
-                                <div class="field-icon-wrap">
-                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="" id="children" class="form-control">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4+</option>
+                                    <select name="lh_periods" id="adults" class="form-control">
+                                        <option value="1">7-9 am</option>
+                                        <option value="2">9-11 am</option>
+                                        <option value="3">11-13pm</option>
+                                        <option value="4">2pm-4pm</option>
+                                        <option value="5">4pm-6pm</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-
-
-
-                        <div class="row mb-4">
-                            <div class="col-md-12 form-group">
-                                <label class="text-black font-weight-bold" for="message">Notes</label>
-                                <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="submit" value="Reserve Now" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                                <button type="submit" name="book_lh" class="btn btn-primary text-white py-3 px-5 font-weight-bold">Book Now</button>
                             </div>
                         </div>
                     </form>
 
                 </div>
-                <?php 
-                    $lh_descs=getSingleHall($hall_id);
-                    foreach($lh_descs as $lh_desc):?>
-                <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-                    <div class="row">
-                        <div class="col-md-10 ml-auto contact-info">
-                        <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php echo $lh_desc['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
-                        <p><span class="d-block">Hall Name</span> <span class="text-black"> <?php echo $lh_desc['lh_name'] ?> </span></p>
-                            <p><span class="d-block">Max Stutents</span> <span class="text-black"> <?php echo $lh_desc['lh_capacity'] ?></span></p>
-                            <p><span class="d-block">Description</span> <span class="text-black"> <?php echo $lh_desc['lh_desc'] ?></span></p>
+                <?php
+                $lh_descs = getSingleHall($hall_id);
+                foreach ($lh_descs as $lh_desc) : ?>
+                    <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="row">
+                            <div class="col-md-10 ml-auto contact-info">
+                                <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php echo $lh_desc['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
+                                <p><span class="d-block">Hall Name</span> <span class="text-black"> <?php echo $lh_desc['lh_name'] ?> </span></p>
+                                <p><span class="d-block">Max Stutents</span> <span class="text-black"> <?php echo $lh_desc['lh_capacity'] ?></span></p>
+                                <p><span class="d-block">Description</span> <span class="text-black"> <?php echo $lh_desc['lh_desc'] ?></span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <?php endforeach ?>
             </div>
         </div>

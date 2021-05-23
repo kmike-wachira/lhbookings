@@ -81,6 +81,72 @@ function getSingleHall($id)
     return $lecturehalls;
 }
 
+function bookHall($lecture_date, $lh_id, $lecture_period, $lecturer_id)
+{
+    global $conn;
+    $book_status = true;
+    $reserve_sql = "INSERT INTO `reservations`(`lecturehall_id`, `lecturer_id`, `date`, `period`)
+     VALUES ('$lh_id','$lecturer_id','$lecture_date','$lecture_period')";
+    if ($conn->query($reserve_sql) === TRUE) {
+        $book_status = true;
+    } else {
+        $book_status = false;
+    }
+}
+
+function ifBooked($lecture_date, $lh_id, $lecture_period)
+{
+    global $conn;
+    $status = true;
+    $check_sql = "SELECT * FROM `reservations` WHERE `lecturehall_id`='$lh_id' AND `date`= '$lecture_date'AND `period`='$lecture_period'";
+    $result = $conn->query($check_sql);
+    if ($result->num_rows > 0) {
+        $status = true;
+    } else {
+        $status = false;
+    }
+    return $status;
+}
+function getHalls($students)
+{
+    global $conn;
+    $capacity_sql = "SELECT * FROM `lecture_rooms` WHERE `lh_capacity`<='$students'";
+    $halls = [];
+    $result_set = $conn->query($capacity_sql);
+    if ($result_set->num_rows > 0) {
+        while ($row = $result_set->fetch_assoc()) {
+            array_push($halls, $row);
+        }
+    }
+    return $halls;
+}
+
+// ifBooked();
+
+if (isset($_POST['book_lh'])) {
+    unset($response_message);
+    $lh_id = $_POST['hall_id'];
+    $lecture_period = $_POST['lh_periods'];
+    $lecture_date = $_POST['l_date'];
+    $response_message = '';
+    $response = ifBooked($lecture_date, $lh_id, $lecture_period);
+    if ($response) {
+        $response_message = 'error';
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    } else {
+        if (bookHall($lecture_date, $lh_id, $lecture_period, '1')) {
+            $response_message = 'correct';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        } else {
+            $response_message = 'error';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+    }
+}
+
 function searchHalls()
 {
     global $conn;
@@ -101,45 +167,8 @@ function searchHalls()
     }
     return $lecturehalls;
 }
+
 if (isset($_POST['check'])) {
-    $rawdata = searchHalls();
-    print_r($rawdata);
-
-    $_SESSION['rawdata'] = $rawdata;
-    // header('location:../index.php');
+    $students = $_POST['no_of_students'];
+    header('Location:../halls.php?students='.$students.'');
 }
-
-if (isset($_GET['book_now'])) {
-    $lh_id = $_GET['lh_id'];
-    $lecturer_id = [$_GET['lecturer_id']];
-    $lecture_date = [$_GET['lecture_date']];
-    $lecture_period = $_GET['lecture_period'];
-    $lecturer_id = 1;
-    $lh_id = 1;
-
-    $reserve_sql = "INSERT INTO `reservations`(`lecturehall_id`, `lecturer_id`, `date`, `period`)
-     VALUES ('$lh_id','$lecturer_id','$lecture_date','$lecture_period')";
-    if ($conn->query($register_sql) === TRUE) {
-        echo "Booked succesfully";
-        header('location:../index.php');
-    } else {
-        echo "An Error Occured";
-    }
-}
-
-function ifBooked()
-{
-    global $conn;
-    $lh_id = 1;
-    $lecture_period = 1;
-    $lecture_date = '2021-05-18';
-
-    $check_sql = "SELECT * FROM `reservations` WHERE `lecturehall_id`='$lh_id' AND `date`= '$lecture_date'AND `period`='$lecture_period'";
-    $result = $conn->query($check_sql);
-    if ($result->num_rows > 0) {
-        echo "Lecture hall Already booked";
-    } else {
-        echo "Booking is possible";
-    }
-}
-ifBooked();
