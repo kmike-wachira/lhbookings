@@ -7,7 +7,7 @@ include 'header.php' ?>
         <div class="row site-hero-inner justify-content-center align-items-center">
             <div class="col-md-10 text-center" data-aos="fade-up">
                 <span class="custom-caption text-uppercase text-white d-block  mb-3">Welcome To LH Booker<span class="fa fa-star text-primary"></span></span>
-                <h6 class="heading">Book a lecture hall for your students with litle hustle</h6>
+                <h6 class="heading">Book a lecture hall for your students with less hustle</h6>
             </div>
         </div>
     </div>

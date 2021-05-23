@@ -87,12 +87,12 @@ function getSingleHall($id)
     return $lecturehalls;
 }
 
-function bookHall($lecture_date, $lh_id, $lecture_period, $lecturer_id)
+function bookHall($lecture_date, $lh_id, $lecture_period, $lecturer_id,$unit_name)
 {
     global $conn;
     $book_status = true;
-    $reserve_sql = "INSERT INTO `reservations`(`lecturehall_id`, `lecturer_id`, `date`, `period`)
-     VALUES ('$lh_id','$lecturer_id','$lecture_date','$lecture_period')";
+    $reserve_sql = "INSERT INTO `reservations`(`lecturehall_id`, `lecturer_id`, `date`, `period`,`unit_name`)
+     VALUES ('$lh_id','$lecturer_id','$lecture_date','$lecture_period','$unit_name')";
     if ($conn->query($reserve_sql) === TRUE) {
         $book_status = true;
     } else {
@@ -134,6 +134,7 @@ if (isset($_POST['book_lh'])) {
     $lh_id = $_POST['hall_id'];
     $lecture_period = $_POST['lh_periods'];
     $lecture_date = $_POST['l_date'];
+    $unit_name=$_POST['unit_name'];
     $response_message = '';
     $response = ifBooked($lecture_date, $lh_id, $lecture_period);
     if ($response) {
@@ -141,14 +142,18 @@ if (isset($_POST['book_lh'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     } else {
-        if (bookHall($lecture_date, $lh_id, $lecture_period, '1')) {
-            $response_message = 'correct';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit;
+        if (isset($_SESSION['id'])) {
+            if (bookHall($lecture_date, $lh_id, $lecture_period, $_SESSION['id'],$unit_name)) {
+                $response_message = 'correct';
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit;
+            } else {
+                $response_message = 'error';
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit;
+            }
         } else {
-            $response_message = 'error';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit;
+            header('Location:../login.php ');
         }
     }
 }
@@ -177,4 +182,43 @@ function searchHalls()
 if (isset($_POST['check'])) {
     $students = $_POST['no_of_students'];
     header('Location:../halls.php?students=' . $students . '');
+}
+
+function getBookings()
+{
+    global $conn;
+    $lectures = [];
+    $sql = "SELECT * FROM `reservations` INNER JOIN lecture_rooms ON `reservations`.`lecturehall_id`=`lecture_rooms`.`id` ORDER by`date` ASC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            array_push($lectures, $row);
+        }
+    } else {
+        echo "0 results";
+    }
+    return $lectures;;
+}
+
+function period($categ)
+{
+    $time = '';
+    switch ($categ) {
+        case 1:
+            $time = "7 am - 9 am";
+            break;
+        case 2:
+            $time = "9 am - 11 am";
+            break;
+        case 3:
+            $time = "11 am - 1 pm";
+            break;
+        case 4:
+            $time = "2pm am - 4 pm";
+            break;
+        case 5:
+            $time = "4 pm - 6 pm";
+            break;
+    }
+    return $time;
 }

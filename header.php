@@ -54,9 +54,12 @@
 
                                             <?php if (isset($_SESSION['id'])) : ?>
                                                 <li><?= $_SESSION['username']?></li>
+                                                <li><a href="timetable.php">Time table</a></li>
+
                                                 <li><a href="logout.php">Logout</a></li>
                                                 <li><a href="addlectureroom.php">Add Halls</a></li>
                                             <?php else :  ?>
+                                                <li><a href="timetable.php">Time table</a></li>
                                                 <li><a href="login.php">Login</a></li>
                                                 <li><a href="register.php">Register</a></li>
                                             <?php endif  ?>
