@@ -1,4 +1,4 @@
-<?php include 'backend/functions.php';?>
+<?php include 'backend/functions.php'; ?>
 <!DOCTYPE HTML>
 <html>
 
@@ -26,8 +26,8 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
+<body>
     <header class="site-header js-site-header">
         <div class="container-fluid">
             <div class="row align-items-center">
@@ -35,8 +35,6 @@
                     <a href="index.php">Room Booker </a>
                 </div>
                 <div class="col-6 col-lg-8">
-
-
                     <div class="site-menu-toggle js-site-menu-toggle" data-aos="fade">
                         <span></span>
                         <span></span>
@@ -72,8 +70,7 @@
         <div class="container">
             <div class="row site-hero-inner justify-content-center align-items-center">
                 <div class="col-md-10 text-center" data-aos="fade-up">
-                    <span class="custom-caption text-uppercase text-white d-block  mb-3">Welcome To LH Booker<span
-              class="fa fa-star text-primary"></span></span>
+                    <span class="custom-caption text-uppercase text-white d-block  mb-3">Welcome To LH Booker<span class="fa fa-star text-primary"></span></span>
                     <h6 class="heading">Book a lecture hall for your students with litle hustle</h6>
                 </div>
             </div>
@@ -93,26 +90,26 @@
             <div class="row check-availabilty" id="next">
                 <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
-                    <form action="#">
+                    <form action="/backend/functions.php" method="post">
                         <div class="row">
                             <div class="col-md-4 mb-3 mb-lg-0 col-lg-3">
                                 <label for="checkin_date" class="font-weight-bold text-black">Lecture Date</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="text" id="checkin_date" class="form-control">
+                                    <input type="text" id="checkin_date" name="lecture_date" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2 mb-3 mb-md-0">
                                 <label for="adults" class="font-weight-bold text-black">Lecture periods</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="" id="adults" class="form-control">
-                    <option value="">7-9 am</option>
-                    <option value="">9-11 am</option>
-                    <option value="">11-13pm</option>
-                    <option value="">2pm-4pm</option>
-                    <option value="">4pm-6pm</option>
-                  </select>
+                                    <select name="lecture_period" id="adults" class="form-control">
+                                        <option value="1">7-9 am</option>
+                                        <option value="2">9-11 am</option>
+                                        <option value="3">11-13pm</option>
+                                        <option value="4">2pm-4pm</option>
+                                        <option value="5">4pm-6pm</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -120,11 +117,11 @@
                                 <label for="checkin_date" class="font-weight-bold text-black">No Of Students</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="number" id="max-students" class="form-control w-100">
+                                    <input type="number" name="no_of_students" id="max-students" class="form-control w-100">
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-3 align-self-end">
-                                <button class="btn btn-primary btn-block text-white">Check Availabilty</button>
+                                <button class="btn btn-primary btn-block text-white" type="submit" name="check">Check Availabilty</button>
                             </div>
                         </div>
                     </form>
@@ -143,43 +140,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <a href="#" class="room">
-                        <figure class="img-wrap">
-                            <img src="images/img_1.jpg" alt="Free website template" class="img-fluid mb-3">
-                        </figure>
-                        <div class="p-3 text-center room-info">
-                            <h5>LH 15</h5>
-                            <span class="text-uppercase letter-spacing-1">150 Students Max</span>
-                            <p><a href="#" class="btn btn-primary text-white">Book Now</a></p>
+                <?php
+                print_r($_SESSION['rawdata']);
+                // if (isset($rawdata)) :
+                    // $data = searchHalls();            
+                    // foreach ($rawdata as $datas) :
+                ?>
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                            <a href="#" class="room">
+                                <figure class="img-wrap">
+                                    <img src="images/img_1.jpg" alt="Free website template" class="img-fluid mb-3">
+                                </figure>
+                                <div class="p-3 text-center room-info">
+                                    <h5>LH 15</h5>
+                                    <span class="text-uppercase letter-spacing-1">150 Students Max</span>
+                                    <p><a href="/backend/functions.php?book_now=true&lecth_id=1&lecture_period=1" class="btn btn-primary text-white">Book Now</a></p>
 
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
 
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <a href="#" class="room">
-                        <figure class="img-wrap">
-                            <img src="images/img_2.jpg" alt="Free website template" class="img-fluid mb-3">
-                        </figure>
-                        <div class="p-3 text-center room-info">
-                            <h2>Family Room</h2>
-                            <span class="text-uppercase letter-spacing-1">120$ / per night</span>
-                        </div>
-                    </a>
-                </div>
+                <?php
+                    // endforeach;
+                // endif;
 
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <a href="#" class="room">
-                        <figure class="img-wrap">
-                            <img src="images/img_3.jpg" alt="Free website template" class="img-fluid mb-3">
-                        </figure>
-                        <div class="p-3 text-center room-info">
-                            <h2>Presidential Room</h2>
-                            <span class="text-uppercase letter-spacing-1">250$ / per night</span>
-                        </div>
-                    </a>
-                </div>
+                ?>
 
 
             </div>
@@ -196,22 +181,22 @@
                 </div>
             </div>
             <div class="row">
-                <?php 
-                $lecturehalls= getAllLectureHalls();
-                foreach($lecturehalls as $lecturehall  ):?>
+                <?php
+                $lecturehalls = getAllLectureHalls();
+                foreach ($lecturehalls as $lecturehall) : ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
-                    <div class="media media-custom d-block mb-4 h-100">
-                        <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php  echo $lecturehall['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
-                        <div class="media-body">
-                            <!-- <span class="meta-post">February 26, 2018</span> -->
-                            <h2 class="mt-0 mb-3"><a href="#"><?php  echo $lecturehall['lh_name'] ?></a></h2>
-                            <span class="meta-post" > Maximum No of Students <strong><?php  echo $lecturehall['lh_capacity'] ?> </strong> </span>
-                            <h4>Brief</h4>
-                            <p><?php  echo $lecturehall['lh_desc'] ?> </p>
+                        <div class="media media-custom d-block mb-4 h-100">
+                            <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php echo $lecturehall['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
+                            <div class="media-body">
+                                <!-- <span class="meta-post">February 26, 2018</span> -->
+                                <h2 class="mt-0 mb-3"><a href="/reservation.php?id=<?php echo $lecturehall['id'] ?>"><?php echo $lecturehall['lh_name'] ?></a></h2>
+                                <span class="meta-post"> Maximum No of Students <strong><?php echo $lecturehall['lh_capacity'] ?> </strong> </span>
+                                <h4>Brief</h4>
+                                <p><?php echo $lecturehall['lh_desc'] ?> </p>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                   <?php endforeach ?>
+                <?php endforeach ?>
             </div>
         </div>
     </section>
@@ -250,11 +235,11 @@
                 <div class="col-md-3 mb-5 pr-md-5 contact-info">
                     <!-- <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li> -->
                     <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> 198
-              West 21th Street, <br> Suite 721 New York NY 10016</span></p>
+                            West 21th Street, <br> Suite 721 New York NY 10016</span></p>
                     <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+1)
-              435 3533</span></p>
+                            435 3533</span></p>
                     <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span>
-              info@domain.com</span></p>
+                            info@domain.com</span></p>
                 </div>
                 <div class="col-md-3 mb-5">
                     <p>Sign up for our newsletter</p>

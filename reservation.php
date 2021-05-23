@@ -1,6 +1,6 @@
 <?php
 include 'backend/functions.php';
-$hall_id = $_GET['id'];
+$hall_id =(int) $_GET['id'];
 
 ?>
 <!DOCTYPE HTML>
@@ -172,18 +172,19 @@ $hall_id = $_GET['id'];
 
                 </div>
                 <?php 
-                 $hall = getSingleHall($hall_id);
-                ?>
+                    $lh_descs=getSingleHall($hall_id);
+                    foreach($lh_descs as $lh_desc):?>
                 <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="row">
                         <div class="col-md-10 ml-auto contact-info">
-                        <a href="#" class="mb-4 d-block"><img src="uploadimages/bible.png" alt="Image placeholder" class="img-fluid"></a>
-                            <p><span class="d-block">Hall Name</span> <span class="text-black"> <?php $hall['lh_name'] ?> </span></p>
-                            <p><span class="d-block">Max Stutents</span> <span class="text-black"> <?php $hall['lh_capacity'] ?></span></p>
-                            <p><span class="d-block">Description</span> <span class="text-black"> <?php $hall['lh_desc'] ?></span></p>
+                        <a href="#" class="mb-4 d-block"><img src="uploadimages/<?php echo $lh_desc['lh_cover_image'] ?>" alt="Image placeholder" class="img-fluid"></a>
+                        <p><span class="d-block">Hall Name</span> <span class="text-black"> <?php echo $lh_desc['lh_name'] ?> </span></p>
+                            <p><span class="d-block">Max Stutents</span> <span class="text-black"> <?php echo $lh_desc['lh_capacity'] ?></span></p>
+                            <p><span class="d-block">Description</span> <span class="text-black"> <?php echo $lh_desc['lh_desc'] ?></span></p>
                         </div>
                     </div>
                 </div>
+                <?php endforeach ?>
             </div>
         </div>
     </section>
