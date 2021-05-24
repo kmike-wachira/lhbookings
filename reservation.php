@@ -2,6 +2,8 @@
 include 'backend/functions.php';
 $hall_id = (int) $_GET['id'];
 include 'header.php';
+// echo $_SESSION['response_message'];
+
 ?>
 
     <!-- END head -->
@@ -33,20 +35,27 @@ include 'header.php';
             <div class="row">
                 <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
 
-                    <?php if ($response_message = 'correct') : ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?php if ($_SESSION['response_message']='correct' ) : ?>
+                        <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>Correct</strong> Lecture Hall booked
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>
-                    <?php elseif($response_message = 'error') : ?>
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        </div> -->
+                    <?php elseif($_SESSION['response_message']='error') : ?>
+                        <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Holy guacamole!</strong> An error ocured
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div> -->
+                        <?php elseif($_SESSION['response_message']='trouble') : ?>
+                        <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Holy guacamole!</strong> The Lecture Hall is already Booked.
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>
+                        </div> -->
 
                     <?php endif ?>
 
@@ -57,8 +66,8 @@ include 'header.php';
                                 <input type="text" name="unit_name" required id="name" class="form-control ">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label class="text-black font-weight-bold" for="name">No of Students</label>
-                                <input type="number" name="number_of_students" required id="name" class="form-control ">
+                                <!-- <label class="text-black font-weight-bold" for="name">No of Students</label>
+                                <input type="number" name="number_of_students" required id="name" class="form-control "> -->
                                 <input type="text" class=" d-none" name="hall_id" value="<?= $hall_id ?>" id="name" class="form-control ">
 
                             </div>

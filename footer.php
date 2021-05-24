@@ -46,6 +46,8 @@
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/jquery.timepicker.min.js"></script>
 
+<script src="js/auto-tables.js"></script>
+
 
 
 <script src="js/main.js"></script>

@@ -4,6 +4,11 @@ $username = "root";
 $password = "";
 $db="lh_booker";
 
+// $servername = "sql100.epizy.com";
+// $username = "epiz_27942028";
+// $password = "SsO9e1XSMZ8WDO";
+// $db="epiz_27942028_lhbookings";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password,$db);
 

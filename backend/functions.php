@@ -98,6 +98,7 @@ function bookHall($lecture_date, $lh_id, $lecture_period, $lecturer_id,$unit_nam
     } else {
         $book_status = false;
     }
+    return $book_status;
 }
 
 function ifBooked($lecture_date, $lh_id, $lecture_period)
@@ -130,32 +131,30 @@ function getHalls($students)
 // ifBooked();
 
 if (isset($_POST['book_lh'])) {
-    unset($response_message);
+    unset($_SESSION['response_message']);
     $lh_id = $_POST['hall_id'];
     $lecture_period = $_POST['lh_periods'];
     $lecture_date = $_POST['l_date'];
     $unit_name=$_POST['unit_name'];
-    $response_message = '';
     $response = ifBooked($lecture_date, $lh_id, $lecture_period);
     if ($response) {
-        $response_message = 'error';
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
-    } else {
+        $_SESSION['response_message'] = 'trouble';
+        header('Location:../reservation.php?id='.$lh_id.'');    } else {
         if (isset($_SESSION['id'])) {
             if (bookHall($lecture_date, $lh_id, $lecture_period, $_SESSION['id'],$unit_name)) {
-                $response_message = 'correct';
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                $_SESSION['response_message'] = 'correct';
+                header('Location:../reservation.php?id='.$lh_id.'');
                 exit;
             } else {
-                $response_message = 'error';
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                $_SESSION['response_message'] = 'error';
+                header('Location:../reservation.php?id='.$lh_id.'');
                 exit;
             }
         } else {
             header('Location:../login.php ');
         }
     }
+
 }
 
 function searchHalls()
