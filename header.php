@@ -1,4 +1,4 @@
-<?php 
+<?php
 // session_start();
 ?>
 <!DOCTYPE HTML>
@@ -54,13 +54,16 @@
                                             <li class="active"><a href="index.php">Home</a></li>
 
                                             <?php if (isset($_SESSION['id'])) : ?>
-                                                <li><?= $_SESSION['username']?></li>
+                                                <li><?= $_SESSION['username'] ?></li>
                                                 <li><a href="timetable.php">Time table</a></li>
-                                                <li><a href="logout.php">Logout</a></li>
                                                 <li><a href="addlectureroom.php">Add Halls</a></li>
-                                                <li><a href="schedules.php"> View Bookings </a></li>
+                                                <li><a href="schedules.php"> Make Up time table </a></li>
+                                                <li><a href="originalTT.php">Original Time table</a></li>
+                                                <li><a href="logout.php">Logout</a></li>
+
+
                                             <?php else :  ?>
-                                                <li><a href="timetable.php">Time table</a></li>
+                                                <!-- <li><a href="timetable.php">Time table</a></li> -->
                                                 <li><a href="login.php">Login</a></li>
                                                 <li><a href="register.php">Register</a></li>
                                             <?php endif  ?>

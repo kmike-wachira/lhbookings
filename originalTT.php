@@ -10,7 +10,7 @@ include 'header.php';
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-md-7">
-                <h2 class="heading" data-aos="fade-up">Booked Lecture Halls</h2>
+                <h2 class="heading" data-aos="fade-up">Original Time Table</h2>
                 <p data-aos="fade-up" data-aos-delay="100"></p>
             </div>
         </div>
@@ -25,12 +25,12 @@ include 'header.php';
                         <th scope="col">Date</th>
                         <th scope="col">Period</th>
                         <th scope="col">Unit Name</th>
-                        <th scope="col">Actions</th>
+                        <!-- <th scope="col">Actions</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $sschedules = getBookings();
+                    $sschedules = getOriginalBookings();
                     foreach ($sschedules as $sch) :
                     ?>
                         <tr>
@@ -39,7 +39,7 @@ include 'header.php';
                             <td> <?= $sch['date'] ?></td>
                             <td><?= $sch['period'] ?></td>
                             <td><?= $sch['unit_name'] ?></td>
-                            <td class=" text-center"><a href="/backend/functions.php?deleteid=<?= $sch['gid'] ?>"> <i class="fas fa-trash-alt text-danger"></i></a></td>
+                            <!-- <td class=" text-center"><a href="/backend/functions.php?deleteid=<?= $sch['gid'] ?>"> <i class="fas fa-trash-alt text-danger"></i></a></td> -->
 
                         </tr>
                     <?php endforeach ?>

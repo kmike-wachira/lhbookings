@@ -217,6 +217,22 @@ function getBookings()
     return $lectures;;
 }
 
+function getOriginalBookings()
+{
+    global $conn;
+    $lectures = [];
+    $sql = "SELECT *,`time_table`.id AS gid FROM `time_table` INNER JOIN lecture_rooms ON `time_table`.`hall_id`=`lecture_rooms`.`id` ORDER by`date` ASC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            array_push($lectures, $row);
+        }
+    } else {
+        echo "0 results";
+    }
+    return $lectures;;
+}
+
 function period($categ)
 {
     $time = '';
