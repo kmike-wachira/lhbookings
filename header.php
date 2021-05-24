@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="css/fancybox.min.css">
 
     <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
@@ -55,9 +56,9 @@
                                             <?php if (isset($_SESSION['id'])) : ?>
                                                 <li><?= $_SESSION['username']?></li>
                                                 <li><a href="timetable.php">Time table</a></li>
-
                                                 <li><a href="logout.php">Logout</a></li>
                                                 <li><a href="addlectureroom.php">Add Halls</a></li>
+                                                <li><a href="schedules.php"> View Bookings </a></li>
                                             <?php else :  ?>
                                                 <li><a href="timetable.php">Time table</a></li>
                                                 <li><a href="login.php">Login</a></li>

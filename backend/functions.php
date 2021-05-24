@@ -87,7 +87,7 @@ function getSingleHall($id)
     return $lecturehalls;
 }
 
-function bookHall($lecture_date, $lh_id, $lecture_period, $lecturer_id,$unit_name)
+function bookHall($lecture_date, $lh_id, $lecture_period, $lecturer_id, $unit_name)
 {
     global $conn;
     $book_status = true;
@@ -114,6 +114,21 @@ function ifBooked($lecture_date, $lh_id, $lecture_period)
     }
     return $status;
 }
+
+function ifBookedOriginal($lecture_date, $lh_id, $lecture_period)
+{
+    global $conn;
+    $status = true;
+    $check_sql = "SELECT * FROM `time_table` WHERE `hall_id`='$lh_id' AND `date`= '$lecture_date'AND `period`='$lecture_period'";
+    $result = $conn->query($check_sql);
+    if ($result->num_rows > 0) {
+        $status = true;
+    } else {
+        $status = false;
+    }
+    return $status;
+}
+
 function getHalls($students)
 {
     global $conn;
@@ -128,33 +143,36 @@ function getHalls($students)
     return $halls;
 }
 
-// ifBooked();
-
 if (isset($_POST['book_lh'])) {
     unset($_SESSION['response_message']);
     $lh_id = $_POST['hall_id'];
     $lecture_period = $_POST['lh_periods'];
     $lecture_date = $_POST['l_date'];
-    $unit_name=$_POST['unit_name'];
-    $response = ifBooked($lecture_date, $lh_id, $lecture_period);
+    $unit_name = $_POST['unit_name'];
+    $response = '';
+    if (ifBooked($lecture_date, $lh_id, $lecture_period) && ifBookedOriginal($lecture_date, $lh_id, $lecture_period)) {
+        $response = true;
+    } else {
+        $response = false;
+    }
     if ($response) {
         $_SESSION['response_message'] = 'trouble';
-        header('Location:../reservation.php?id='.$lh_id.'');    } else {
+        header('Location:../reservation.php?id=' . $lh_id . '');
+    } else {
         if (isset($_SESSION['id'])) {
-            if (bookHall($lecture_date, $lh_id, $lecture_period, $_SESSION['id'],$unit_name)) {
+            if (bookHall($lecture_date, $lh_id, $lecture_period, $_SESSION['id'], $unit_name)) {
                 $_SESSION['response_message'] = 'correct';
-                header('Location:../reservation.php?id='.$lh_id.'');
+                header('Location:../reservation.php?id=' . $lh_id . '');
                 exit;
             } else {
                 $_SESSION['response_message'] = 'error';
-                header('Location:../reservation.php?id='.$lh_id.'');
+                header('Location:../reservation.php?id=' . $lh_id . '');
                 exit;
             }
         } else {
             header('Location:../login.php ');
         }
     }
-
 }
 
 function searchHalls()
@@ -187,7 +205,7 @@ function getBookings()
 {
     global $conn;
     $lectures = [];
-    $sql = "SELECT * FROM `reservations` INNER JOIN lecture_rooms ON `reservations`.`lecturehall_id`=`lecture_rooms`.`id` ORDER by`date` ASC";
+    $sql = "SELECT *,`reservations`.id AS gid FROM `reservations` INNER JOIN lecture_rooms ON `reservations`.`lecturehall_id`=`lecture_rooms`.`id` ORDER by`date` ASC";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -204,20 +222,32 @@ function period($categ)
     $time = '';
     switch ($categ) {
         case 1:
-            $time = "7 am - 9 am";
+            $time = "8 am - 11 am";
             break;
         case 2:
-            $time = "9 am - 11 am";
+            $time = "11 am - 2 pm";
             break;
         case 3:
-            $time = "11 am - 1 pm";
-            break;
-        case 4:
-            $time = "2pm am - 4 pm";
-            break;
-        case 5:
-            $time = "4 pm - 6 pm";
+            $time = "2 pm - 5 pm";
             break;
     }
     return $time;
 }
+
+if (isset($_GET['deleteid'])) {
+    deleteReserve($_GET['deleteid']);
+}
+
+function deleteReserve($reserveid)
+{
+    global $conn;
+    $sql = "DELETE FROM `reservations` WHERE `id`='$reserveid'";
+
+    if ($conn->query($sql) === TRUE) {
+        header('Location:../schedules.php');
+    } else {
+        header('Location:../schedules.php');
+    }
+}
+
+// print_r(getBookings());

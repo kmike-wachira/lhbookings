@@ -85,11 +85,9 @@ include 'header.php';
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                     <select name="lh_periods" id="adults" class="form-control">
-                                        <option value="1">7-9 am</option>
-                                        <option value="2">9-11 am</option>
-                                        <option value="3">11-13pm</option>
-                                        <option value="4">2pm-4pm</option>
-                                        <option value="5">4pm-6pm</option>
+                                    <option value="1"> 8 am -11 am</option>
+                                    <option value="2">11 am - 2pm</option>
+                                    <option value="3">2pm -5pm</option>
                                     </select>
                                 </div>
                             </div>

@@ -48,6 +48,19 @@
 
 <script src="js/auto-tables.js"></script>
 
+<script>
+    $(document).ready(function() {
+
+        var headers = $('#data-table thead th');
+
+        $(headers[5]).attr('data-tablesort-type', 'date');
+
+
+        $('table').not(".tablesort").addClass('tablesort');
+        // $('')
+
+    });
+</script>
 
 
 <script src="js/main.js"></script>
