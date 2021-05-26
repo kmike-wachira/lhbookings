@@ -45,7 +45,6 @@ include 'header.php';
                     <?php endforeach ?>
                 </tbody>
             </table>
-
         </div>
     </div>
 </section>

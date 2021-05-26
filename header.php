@@ -45,7 +45,7 @@
                     </div>
                     <!-- END menu-toggle -->
 
-                    <div class="site-navbar js-site-navbar">
+                    <div class="site-navbar js-site-navbar" >
                         <nav role="navigation">
                             <div class="container">
                                 <div class="row full-height align-items-center">

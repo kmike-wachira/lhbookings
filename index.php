@@ -41,9 +41,9 @@ include 'header.php' ?>
                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                 <select name="lecture_period" id="adults" class="form-control">
                                     <option value="1"> 8 am -11 am</option>
-                                    <option value="2">11 am - 2pm</option>
-                                    <option value="3">2pm -5pm</option>
-                                   
+                                    <option value="2">11 am - 2 pm</option>
+                                    <option value="3">2 pm -5 pm</option>
+
                                 </select>
                             </div>
                         </div>

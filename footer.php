@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-6 mb-5">
-                <ul class="list-unstyled link">
+                <ul class="list-unstyled link" >
                     <li class="active"><a href="index.php">Home</a></li>
                     <li><a href="login.php">Login</a></li>
                     <li><a href="register.php">Register</a></li>

@@ -230,7 +230,7 @@ function getOriginalBookings()
     } else {
         echo "0 results";
     }
-    return $lectures;;
+    return $lectures;
 }
 
 function period($categ)
