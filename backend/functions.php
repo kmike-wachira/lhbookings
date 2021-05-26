@@ -149,12 +149,21 @@ if (isset($_POST['book_lh'])) {
     $lecture_period = $_POST['lh_periods'];
     $lecture_date = $_POST['l_date'];
     $unit_name = $_POST['unit_name'];
-    $response = '';
-    if (ifBooked($lecture_date, $lh_id, $lecture_period) && ifBookedOriginal($lecture_date, $lh_id, $lecture_period)) {
-        $response = true;
+    $response = true;
+    if (ifBooked($lecture_date, $lh_id, $lecture_period)) {
+        if (!ifBookedOriginal($lecture_date, $lh_id, $lecture_period)) {
+            $response = true;
+        } else {
+            $response = false;
+        }
     } else {
         $response = false;
     }
+
+
+
+
+
     if ($response) {
         $_SESSION['response_message'] = 'trouble';
         header('Location:../reservation.php?id=' . $lh_id . '');
@@ -230,7 +239,7 @@ function getOriginalBookings()
     } else {
         echo "0 results";
     }
-    return $lectures;
+    return $lectures;;
 }
 
 function period($categ)

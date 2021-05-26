@@ -55,9 +55,11 @@ if ($uploadOk == 0) {
         } else {
             echo "Error: " . $upload_sql . "<br>" . $conn->error;
         }
-        echo "The file " . htmlspecialchars(basename($_FILES["lh_cover_image"]["name"])) . " has been uploaded.";
+       header("Location:../addlectureroom.php");
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        // echo "Sorry, there was an error uploading your file.";
+       header("Location:../addlectureroom.php");
+
     }
 }
 
