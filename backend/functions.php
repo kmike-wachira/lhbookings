@@ -151,7 +151,7 @@ if (isset($_POST['book_lh'])) {
     $unit_name = $_POST['unit_name'];
     $response = true;
     if (ifBooked($lecture_date, $lh_id, $lecture_period)) {
-        if (!ifBookedOriginal($lecture_date, $lh_id, $lecture_period)) {
+        if (ifBookedOriginal($lecture_date, $lh_id, $lecture_period)) {
             $response = true;
         } else {
             $response = false;

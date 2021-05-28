@@ -35,21 +35,21 @@ include 'header.php';
 
                 <?php
             
-                if ($_SESSION['response_message'] == "correct") : ?>
+                if (isset($_SESSION['response_message'])&& $_SESSION['response_message'] == "correct") : ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>Correct</strong> Lecture Hall booked
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                <?php elseif ($_SESSION['response_message'] == "error") : ?>
+                <?php elseif (isset($_SESSION['response_message']) && $_SESSION['response_message'] == "error") : ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>Holy guacamole!</strong> An error ocured
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                <?php elseif ($_SESSION['response_message'] == "trouble") : ?>
+                <?php elseif (isset($_SESSION['response_message']) && $_SESSION['response_message'] == "trouble") : ?>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Holy guacamole!</strong> The Lecture Hall is already Booked.
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
